@@ -11,36 +11,67 @@ Author: Rashmi Malpande
 function wct_create_category(){
     
     $labels = array(
-        'name' => 'Coupon Categories',
-        'singular_name' => 'Coupon Category',
-        'search_items' => __('Search Coupon Category'),
-        'all_items' => __('All Categories'),
-        'parent_item' => __('Parent Coupon Category'),
-        'parent_item_colon' => __('Parent Coupon Category:'),
-        'edit_item' => __('Edit Coupon Category'),
-        'update_item' => __('Update Coupon Category'),
-        'add_new_item' => __('Add New Coupon Categry'),
-        'new_item_name' => __('New Coupon Category Name'),
-        'menu_name' => __('Categories'),
+        'name' => __( 'Coupon categories', 'woocommerce-coupon-taxonomy' ),
+		'singular_name'     => __( 'Category', 'woocommerce-coupon-taxonomy' ),
+		'menu_name'         => _x( 'Coupon Categories', 'Admin menu name', 'woocommerce-coupon-taxonomy' ),
+		'search_items'      => __( 'Search categories', 'woocommerce-coupon-taxonomy' ),
+		'all_items'         => __( 'All categories', 'woocommerce-coupon-taxonomy' ),
+		'parent_item'       => __( 'Parent category', 'woocommerce-coupon-taxonomy' ),
+		'parent_item_colon' => __( 'Parent category:', 'woocommerce-coupon-taxonomy' ),
+		'edit_item'         => __( 'Edit category', 'woocommerce-coupon-taxonomy' ),
+		'update_item'       => __( 'Update category', 'woocommerce-coupon-taxonomy' ),
+		'add_new_item'      => __( 'Add new category', 'woocommerce-coupon-taxonomy' ),
+		'new_item_name'     => __( 'New category name', 'woocommerce-coupon-taxonomy' ),
+		'not_found'         => __( 'No categories found', 'woocommerce-coupon-taxonomy' ),
 
     );
 
-    register_taxonomy( 'coupon categories', array('shop_coupon'), array(
+    register_taxonomy( 'coupon_category', array('shop_coupon'), array(
         'hierarchical' => true,
         'labels' => $labels,
         'show_ui' => true,
         'show_admin_column' => true,
         'query_var' => true,
+        'show_in_menu' => true,
+        'public' => true,
         'rewrite' => array( 'slug' => 'coupon_category' ),
     ) );
+
+    register_taxonomy_for_object_type('coupon_category', 'shop_coupon');
 }
 add_action( 'init', 'wct_create_category');
 
 
+function wct_create_tag(){
+    
+    $labels = array(
+        'name' => __( 'Coupon tags', 'woocommerce-coupon-taxonomy' ),
+		'singular_name'     => __( 'Tag', 'woocommerce-coupon-taxonomy' ),
+		'menu_name'         => _x( 'Coupon tags', 'Admin menu name', 'woocommerce-coupon-taxonomy' ),
+		'search_items'      => __( 'Search tags', 'woocommerce-coupon-taxonomy' ),
+		'all_items'         => __( 'All tags', 'woocommerce-coupon-taxonomy' ),
+		'parent_item'       => __( 'Parent tag', 'woocommerce-coupon-taxonomy' ),
+		'parent_item_colon' => __( 'Parent tag:', 'woocommerce-coupon-taxonomy' ),
+		'edit_item'         => __( 'Edit tag', 'woocommerce-coupon-taxonomy' ),
+		'update_item'       => __( 'Update tag', 'woocommerce-coupon-taxonomy' ),
+		'add_new_item'      => __( 'Add new tag', 'woocommerce-coupon-taxonomy' ),
+		'new_item_name'     => __( 'New tag name', 'woocommerce-coupon-taxonomy' ),
+		'not_found'         => __( 'No tags found', 'woocommerce-coupon-taxonomy' ),
 
+    );
 
+    register_taxonomy( 'coupon_tag', array('shop_coupon'), array(
+        'hierarchical' => false,
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'show_in_menu' => true,
+        'public' => true,
+        'rewrite' => array( 'slug' => 'coupon_tag' ),
+    ) );
 
+    register_taxonomy_for_object_type('coupon_tag', 'shop_coupon');
+}
+add_action( 'init', 'wct_create_tag');
 
-
-
-?>
