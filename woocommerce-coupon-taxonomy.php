@@ -88,7 +88,12 @@ function wct_custom_taxonomy_columns( $columns )
 function wct_custom_taxonomy_content($column_name, $post_id){
 
     if($column_name == 'coupon_category'){
-
+        $terms = get_the_terms($post_id, 'coupon_category' );
+        foreach ( $terms as $term ) {
+            $output[] = '<a href="' . admin_url( 'edit.php?coupon_category' . '='.  $term->slug . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
+            
+        }
+        echo join( ', ', $output );
     }
 
     if($column_name == 'coupon_tag'){
