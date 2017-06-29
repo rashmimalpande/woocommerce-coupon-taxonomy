@@ -84,4 +84,21 @@ function wct_custom_taxonomy_columns( $columns )
 
 	return $columns;
 }
+
+function wct_custom_taxonomy_content($column_name, $post_id){
+
+    if($column_name == 'coupon_category'){
+
+    }
+
+    if($column_name == 'coupon_tag'){
+        $terms = get_the_terms($post_id, 'coupon_tag' );
+        foreach ( $terms as $term ) {
+            echo $term->name;
+        }
+        
+    }
+   
+}
 add_filter('manage_edit-shop_coupon_columns' , 'wct_custom_taxonomy_columns');
+add_action( 'manage_shop_coupon_posts_custom_column', 'wct_custom_taxonomy_content', 10, 2 );
