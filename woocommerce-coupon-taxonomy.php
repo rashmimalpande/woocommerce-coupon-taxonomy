@@ -75,3 +75,13 @@ function wct_create_tag(){
 }
 add_action( 'init', 'wct_create_tag');
 
+
+function wct_custom_taxonomy_columns( $columns )
+{
+	$columns['coupon_category'] = __('Coupon Categories');
+	$columns['coupon_tag'] = __('Coupon Tags');
+    
+
+	return $columns;
+}
+add_filter('manage_edit-shop_coupon_columns' , 'wct_custom_taxonomy_columns');
