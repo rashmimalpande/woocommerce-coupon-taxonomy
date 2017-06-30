@@ -7,20 +7,20 @@ Author: Rashmi Malpande
 
 */
 
-
+//Register custom taxonomy called Coupon categories 
 function wct_create_category(){
     
     $labels = array(
         'name' => __( 'Coupon categories', 'woocommerce-coupon-taxonomy' ),
 		'singular_name'     => __( 'Category', 'woocommerce-coupon-taxonomy' ),
 		'menu_name'         => _x( 'Coupon Categories', 'Admin menu name', 'woocommerce-coupon-taxonomy' ),
-		'search_items'      => __( 'Search categories', 'woocommerce-coupon-taxonomy' ),
+		'search_items'      => __( 'Search Coupon categories', 'woocommerce-coupon-taxonomy' ),
 		'all_items'         => __( 'All categories', 'woocommerce-coupon-taxonomy' ),
 		'parent_item'       => __( 'Parent category', 'woocommerce-coupon-taxonomy' ),
 		'parent_item_colon' => __( 'Parent category:', 'woocommerce-coupon-taxonomy' ),
 		'edit_item'         => __( 'Edit category', 'woocommerce-coupon-taxonomy' ),
 		'update_item'       => __( 'Update category', 'woocommerce-coupon-taxonomy' ),
-		'add_new_item'      => __( 'Add new category', 'woocommerce-coupon-taxonomy' ),
+		'add_new_item'      => __( 'Add new coupon category', 'woocommerce-coupon-taxonomy' ),
 		'new_item_name'     => __( 'New category name', 'woocommerce-coupon-taxonomy' ),
 		'not_found'         => __( 'No categories found', 'woocommerce-coupon-taxonomy' ),
 
@@ -90,7 +90,7 @@ function wct_custom_taxonomy_content($column_name, $post_id){
     if($column_name == 'coupon_category'){
         $terms = get_the_terms($post_id, 'coupon_category' );
         foreach ( $terms as $term ) {
-            $output[] = '<a href="' . admin_url( 'edit.php?coupon_category' . '='.  $term->slug . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
+            $output[] = '<a href="' . admin_url( 'edit.php?coupon_category' . '='.  $term->term_id . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
             
         }
         echo join( ', ', $output );
@@ -99,7 +99,7 @@ function wct_custom_taxonomy_content($column_name, $post_id){
     if($column_name == 'coupon_tag'){
         $terms = get_the_terms($post_id, 'coupon_tag' );
         foreach ( $terms as $term ) {
-            $output[] = '<a href="' . admin_url( 'edit.php?coupon_tag' . '='.  $term->slug . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
+            $output[] = '<a href="' . admin_url( 'edit.php?coupon_tag' . '='.  $term->term_id . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
             
         }
         echo join( ', ', $output );
