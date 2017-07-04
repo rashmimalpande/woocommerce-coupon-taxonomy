@@ -92,7 +92,7 @@ function wct_custom_taxonomy_content($column_name, $post_id){
 
         if( !empty($terms) ){
             foreach ( $terms as $term ) {
-                $output[] = '<a href="' . admin_url( 'edit.php?coupon_category' . '='.  $term->term_id . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
+                $output[] = '<a href="' . admin_url( 'edit.php?coupon_category' . '='.  $term->slug . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
                 
             }
             echo join( ', ', $output );
@@ -101,21 +101,24 @@ function wct_custom_taxonomy_content($column_name, $post_id){
         else{
             echo '-';
         }
+        
     }
 
     if($column_name == 'coupon_tag'){
         $terms = get_the_terms($post_id, 'coupon_tag' );
         if( !empty($terms) ){
             foreach ( $terms as $term ) {
-                $output[] = '<a href="' . admin_url( 'edit.php?coupon_tag' . '='.  $term->term_id . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
+                $output[] = '<a href="' . admin_url( 'edit.php?coupon_tag' . '='.  $term->slug . '&post_type=' . 'shop_coupon' ) . '">' . $term->name . '</a>';
                 
             }
             echo join( ', ', $output );
+
         }
 
         else{
             echo '-';
         }
+
     }
    
 }
