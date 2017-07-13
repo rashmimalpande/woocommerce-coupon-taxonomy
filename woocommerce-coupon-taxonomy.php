@@ -125,3 +125,24 @@ function wct_custom_taxonomy_content($column_name, $post_id){
 add_filter('manage_edit-shop_coupon_columns' , 'wct_custom_taxonomy_columns');
 add_action( 'manage_shop_coupon_posts_custom_column', 'wct_custom_taxonomy_content', 10, 2 );
 
+
+
+function add_coupon_category_admin_submenu() {
+    add_submenu_page( 'woocommerce', 'Coupon Categories', 'Coupon Categories', 'manage_options', 'edit-tags.php?taxonomy=coupon_category');
+}
+
+function make_menu_active( $parent_file ) {
+        global $current_screen;
+
+        $taxonomy = $current_screen->taxonomy;
+        if ( $taxonomy == 'coupon_category' ) {
+            $parent_file = 'woocommerce';
+        }
+
+        return $parent_file;
+}
+
+
+add_action('admin_menu', 'add_coupon_category_admin_submenu');
+add_filter('parent_file', 'make_menu_active');
+
